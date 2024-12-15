@@ -8,17 +8,23 @@ using namespace std;
 class Solution {
   public:
     int peakElement(vector<int> &arr) {
-        // Your code here 
-       int n = arr.size();
+        // Your code here
+        int n = arr.size();
+
         for (int i = 0; i < n; ++i) {
-        if ((i == 0 || arr[i] >= arr[i - 1]) &&
-            (i == n - 1 || arr[i] >= arr[i + 1])) {
-            return i;
+         
+        bool isLeftSmaller = (i == 0 || arr[i] > arr[i - 1]);
+        bool isRightSmaller = (i == n - 1 || arr[i] > arr[i + 1]);
+
+        if (isLeftSmaller && isRightSmaller) {
+            return i;  
         }
     }
-    return -1;
-    }
-     
+
+    return -1;  
+}
+
+    
 };
 
 //{ Driver Code Starts.
@@ -38,19 +44,19 @@ int main() {
         }
 
         Solution ob;
-        int A = ob.peakElement(a);
+        int idx = ob.peakElement(a);
         int n = a.size();
         bool f = 0;
-        if (A < 0 and A >= n)
-            cout << 0 << endl;
+        if (idx < 0 and idx >= n)
+            cout << "false" << endl;
         else {
-            if (n == 1 and A == 0)
+            if (n == 1 and idx == 0)
                 f = 1;
-            else if (A == 0 and a[0] >= a[1])
+            else if (idx == 0 and a[0] > a[1])
                 f = 1;
-            else if (A == n - 1 and a[n - 1] >= a[n - 2])
+            else if (idx == n - 1 and a[n - 1] > a[n - 2])
                 f = 1;
-            else if (a[A] >= a[A + 1] and a[A] >= a[A - 1])
+            else if (a[idx] > a[idx + 1] and a[idx] > a[idx - 1])
                 f = 1;
             else
                 f = 0;
