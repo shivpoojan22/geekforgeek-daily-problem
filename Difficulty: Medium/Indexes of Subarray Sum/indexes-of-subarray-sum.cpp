@@ -7,26 +7,24 @@ using namespace std;
 class Solution {
   public:
     vector<int> subarraySum(vector<int> &arr, int target) {
-        int start=0, curr_sum=0;
-        
-        for(int end=0; end<arr.size(); end++){
-            
-            curr_sum=curr_sum+arr[end];
-            
-            while(curr_sum > target && start<=end){
-                
-                curr_sum=curr_sum - arr[start];
-                
-                start++;
-            }
-            
-            if(curr_sum == target){
-                
-                return{start+1, end+1};
-            }
+        // code here
+  
+        int n = arr.size();
+        int start = 0, currentSum = 0;
+
+        for (int end = 0; end < n; ++end) {
+            currentSum += arr[end];
+
+            while (currentSum > target && start <= end) {
+                currentSum -= arr[start++];
         }
-        
-        return {-1};
+
+        if (currentSum == target) {
+            return {start + 1, end + 1};
+        }
+    }
+
+    return {-1};
     }
 };
 
@@ -35,13 +33,13 @@ class Solution {
 int main() {
     int t;
     cin >> t;
-    cin.ignore(); // Ignore the newline character after t
+    cin.ignore();
     while (t--) {
         vector<int> arr;
         int d;
         string input;
 
-        getline(cin, input); // Read the entire line for the array elements
+        getline(cin, input);
         stringstream ss(input);
         int number;
         while (ss >> number) {
@@ -49,7 +47,7 @@ int main() {
         }
 
         cin >> d;
-        cin.ignore(); // Ignore the newline character after d
+        cin.ignore();
 
         Solution ob;
         vector<int> result = ob.subarraySum(arr, d);
